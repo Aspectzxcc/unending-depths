@@ -17,17 +17,18 @@ void Level::display() {
     std::getline(std::cin, commandl);
 
     if (commandl.rfind("go ", 0) == 0) {
+      if (current_room_index >= rooms.size()) {
+        std::cout << "You have reached the end of the level!" << std::endl;
+        in_level = false;
+        return;
+      }
+
       std::string direction = commandl.substr(3);
       std::cout << "You are moving " << direction << " to room "
                 << current_room_index + 1 << std::endl;
       rooms[current_room_index]->display();
 
       ++current_room_index;
-
-      if (current_room_index >= rooms.size()) {
-        std::cout << "You have reached the end of the level!" << std::endl;
-        in_level = false;
-      }
     } else if (commandl == "exit") {
       std::cout << "Exiting level." << std::endl;
       in_level = false;

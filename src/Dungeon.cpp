@@ -17,16 +17,17 @@ void Dungeon::display() {
     std::getline(std::cin, command);
 
     if (command == "descend") {
+      if (current_level_index >= levels.size()) {
+        std::cout << "You have reached the bottom of the dungeon!" << std::endl;
+        in_dungeon = false;
+        return;
+      }
+
       std::cout << "You are descending to level " << current_level_index + 1
                 << std::endl;
       levels[current_level_index]->display();
 
       ++current_level_index;
-
-      if (current_level_index >= levels.size()) {
-        std::cout << "You have reached the bottom of the dungeon!" << std::endl;
-        in_dungeon = false;
-      }
     } else if (command == "exit") {
       std::cout << "Exiting dungeon." << std::endl;
       in_dungeon = false;
