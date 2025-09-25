@@ -1,4 +1,5 @@
 #include "Game.hpp"
+#include "Console.hpp"
 #include "Dungeon.hpp"
 #include <iostream>
 #include <string>
@@ -8,6 +9,7 @@ void Game::run() {
   bool is_running = true;
 
   while (is_running) {
+    Console::clear_screen();
     std::cout << "Enter command (start/exit): ";
     std::getline(std::cin, command);
 

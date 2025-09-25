@@ -1,4 +1,5 @@
 #include "Level.hpp"
+#include "Console.hpp"
 #include <iostream>
 
 Level::Level() {
@@ -12,6 +13,7 @@ void Level::display() {
   bool in_level = true;
 
   while (in_level) {
+    Console::clear_screen();
     if (current_room_index == 0) {
       std::cout << "You are in the starting room." << std::endl;
     } else {

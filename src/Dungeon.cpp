@@ -1,4 +1,5 @@
 #include "Dungeon.hpp"
+#include "Console.hpp"
 #include <iostream>
 
 Dungeon::Dungeon() {
@@ -12,6 +13,7 @@ void Dungeon::display() {
   bool in_dungeon = true;
 
   while (in_dungeon) {
+    Console::clear_screen();
     if (current_level_index == 0) {
       std::cout << "You are at the entrance of the dungeon." << std::endl;
     } else {
