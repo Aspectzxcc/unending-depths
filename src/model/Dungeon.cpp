@@ -1,9 +1,19 @@
 #include "model/Dungeon.hpp"
 
 Dungeon::Dungeon() {
-  for (std::size_t i = 0; i < DEFAULT_NUM_LEVELS; ++i) {
+  std::size_t MIN_NUM_LEVELS = 1;
+
+  for (std::size_t i = 0; i < MIN_NUM_LEVELS; ++i) {
     levels.push_back(std::make_unique<Level>());
   }
+}
+
+bool Dungeon::descend() {
+  if (current_level_index >= levels.size()) {
+    return false;
+  }
+  ++current_level_index;
+  return true;
 }
 
 // getters
@@ -14,9 +24,6 @@ const std::vector<std::unique_ptr<Level>> &Dungeon::get_levels() const {
   return levels;
 }
 
-// setters
-void Dungeon::add_level(std::unique_ptr<Level> level) {
-  levels.push_back(std::move(level));
+Level &Dungeon::get_current_level() {
+  return *(levels[current_level_index - 1]);
 }
-
-void Dungeon::increment_current_level_index() { ++current_level_index; }

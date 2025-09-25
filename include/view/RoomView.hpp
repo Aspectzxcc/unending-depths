@@ -1,18 +1,17 @@
 #pragma once
+#include "model/Level.hpp"
 #include "model/Room.hpp"
-#include <functional>
-#include <string>
-#include <unordered_map>
+#include "view/BaseView.hpp"
 
-class RoomView {
+class RoomView : public BaseView<Room> {
 public:
-  RoomView(Room &room);
-  void display();
-  void handle_command(const std::string &command);
+  RoomView(Room &room, Level &level);
+  void render() override;
 
 private:
-  Room &room;
-  std::unordered_map<std::string, std::function<void()>> commands;
+  Level &level;
+  bool looked = false;
+  void go(const std::string &direction);
   void look();
   void exit();
 };

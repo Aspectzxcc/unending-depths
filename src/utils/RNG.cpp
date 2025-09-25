@@ -14,3 +14,8 @@ int RNG::range(int min, int max) {
   std::uniform_int_distribution<int> dist(min, max);
   return dist(get_engine());
 }
+
+std::size_t RNG::range(std::size_t min, std::size_t max) {
+  std::uniform_int_distribution<std::size_t> dist(min, max);
+  return dist(get_engine());
+}

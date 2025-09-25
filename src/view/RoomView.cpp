@@ -2,65 +2,61 @@
 #include "utils/Console.hpp"
 #include <iostream>
 
-RoomView::RoomView(Room &room) : room(room) {
+RoomView::RoomView(Room &room, Level &level)
+    : BaseView<Room>(room), level(level) {
+  commands["go north"] = [this]() { go("north"); };
+  commands["go south"] = [this]() { go("south"); };
+  commands["go east"] = [this]() { go("east"); };
+  commands["go west"] = [this]() { go("west"); };
+  commands["go northeast"] = [this]() { go("northeast"); };
+  commands["go northwest"] = [this]() { go("northwest"); };
+  commands["go southeast"] = [this]() { go("southeast"); };
+  commands["go southwest"] = [this]() { go("southwest"); };
   commands["look"] = [this]() { look(); };
   commands["exit"] = [this]() { exit(); };
 }
 
-void RoomView::handle_command(const std::string &command) {
-  auto it = commands.find(command);
-  if (it != commands.end()) {
-    it->second();
-  } else {
-    std::cout << "Invalid command." << std::endl;
-    Console::wait_for_keypress();
+void RoomView::render() {
+  std::cout << "You are in room " << level.get_current_room_index() + 1
+            << std::endl;
+  if (looked) {
+    for (const auto &enemy : model.get_enemies()) {
+      std::cout << "Enemy: " << enemy.get_name() << std::endl;
+    }
+    for (const auto &item : model.get_loot()) {
+      std::cout << "Loot: " << item.get_name() << std::endl;
+    }
   }
+  std::cout << "Enter command (go <direction>/look/exit): ";
 }
 
-void RoomView::display() {
-  std::string command;
-  bool in_room = true;
-
-  while (in_room) {
-    Console::clear_screen();
-    std::cout << "You have entered a room." << std::endl;
-
-    std::cout << "Enemies in the room:" << std::endl;
-    for (const auto &enemy : room.get_enemies()) {
-      std::cout << "- " << enemy.get_name() << " (HP: " << enemy.get_stats().hp
-                << ")" << std::endl;
-    }
-
-    std::cout << "Loot in the room:" << std::endl;
-    for (const auto &item : room.get_loot()) {
-      std::cout << "- " << item.get_name() << std::endl;
-    }
-
-    std::cout << "Enter command (look/exit): ";
-    std::getline(std::cin, command);
-
-    try {
-      handle_command(command);
-    } catch (const std::runtime_error &e) {
-      if (std::string(e.what()) == "Exit room") {
-        in_room = false;
-      } else {
-        throw;
-      }
-    }
+void RoomView::go(const std::string &_) {
+  if (!level.spawn_room()) {
+    std::cout << "No more rooms to explore in this level." << std::endl;
+    Console::wait_for_keypress();
+    return;
   }
 }
 
 void RoomView::look() {
+  looked = true;
   std::cout << "You look around the room." << std::endl;
-  if (room.get_enemies().empty() && room.get_loot().empty()) {
+
+  if (model.get_enemies().empty() && model.get_loot().empty()) {
     std::cout << "The room is empty." << std::endl;
+  }
+
+  for (const auto &enemy : model.get_enemies()) {
+    std::cout << "You see an enemy: " << enemy.get_name() << std::endl;
+  }
+
+  for (const auto &item : model.get_loot()) {
+    std::cout << "You see a loot item: " << item.get_name() << std::endl;
   }
   Console::wait_for_keypress();
 }
 
 void RoomView::exit() {
   std::cout << "Exiting room." << std::endl;
-  // break loop by exception to signal exit
-  throw std::runtime_error("Exit room");
+  running = false;
 }
