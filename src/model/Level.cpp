@@ -1,5 +1,5 @@
 #include "model/Level.hpp"
-#include "utils/RNG.hpp"
+#include "util/RNG.hpp"
 
 Level::Level() {
   std::size_t MIN_NUM_ROOMS = 1;

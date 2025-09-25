@@ -1,7 +1,5 @@
 #include "Game.hpp"
-#include "model/Dungeon.hpp"
-#include "utils/Console.hpp"
-#include "view/DungeonView.hpp"
+#include "util/Console.hpp"
 #include <iostream>
 #include <string>
 
@@ -15,9 +13,7 @@ void Game::run() {
     std::getline(std::cin, command);
 
     if (command == "start") {
-      Dungeon dungeon;
-      DungeonView dungeon_view(dungeon);
-      dungeon_view.display();
+      break;
     } else if (command == "exit") {
       std::cout << "Exiting game." << std::endl;
       is_running = false;

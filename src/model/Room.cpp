@@ -1,6 +1,6 @@
 #include "model/Room.hpp"
 #include "model/Stats.hpp"
-#include "utils/RNG.hpp"
+#include "util/RNG.hpp"
 #include <cstddef>
 
 Room::Room() {
