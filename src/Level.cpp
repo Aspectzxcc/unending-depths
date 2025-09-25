@@ -12,7 +12,11 @@ void Level::display() {
   bool in_level = true;
 
   while (in_level) {
-    std::cout << "You are in room " << current_room_index << std::endl;
+    if (current_room_index == 0) {
+      std::cout << "You are in the starting room." << std::endl;
+    } else {
+      std::cout << "You are in room " << current_room_index << std::endl;
+    }
     std::cout << "Enter command (go <direction>/exit): ";
     std::getline(std::cin, commandl);
 

@@ -12,7 +12,11 @@ void Dungeon::display() {
   bool in_dungeon = true;
 
   while (in_dungeon) {
-    std::cout << "You are on level " << current_level_index << std::endl;
+    if (current_level_index == 0) {
+      std::cout << "You are at the entrance of the dungeon." << std::endl;
+    } else {
+      std::cout << "You are at level " << current_level_index << std::endl;
+    }
     std::cout << "Enter command (descend/exit): " << std::endl;
     std::getline(std::cin, command);
 

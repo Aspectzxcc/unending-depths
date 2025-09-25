@@ -1,13 +1,24 @@
 #include "Room.hpp"
+#include "RNG.hpp"
 #include "Stats.hpp"
 #include <iostream>
 
 Room::Room() {
-  // Initialize room with some enemies and loot (placeholder)
-  enemies.emplace_back(Stats{30, 15, 10, 10}, "Goblin");
-  enemies.emplace_back(Stats{20, 10, 5, 10}, "Orc");
-  loot.emplace_back("Health Potion");
-  loot.emplace_back("Sword");
+  if (RNG::roll_chance(0.5)) {
+    int spawned_enemies_count = RNG::range(1, 3);
+
+    for (int i = 1; i <= spawned_enemies_count; ++i) {
+      enemies.emplace_back(Stats{25, 12, 8, 10}, "Skeleton");
+    }
+  }
+
+  if (RNG::roll_chance(0.3)) {
+    int spawned_loot_count = RNG::range(1, 2);
+
+    for (int i = 1; i <= spawned_loot_count; ++i) {
+      loot.emplace_back("Health Potion");
+    }
+  }
 }
 
 void Room::display() {
