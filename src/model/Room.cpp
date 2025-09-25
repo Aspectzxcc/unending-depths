@@ -1,9 +1,6 @@
 #include "Room.hpp"
-#include "Console.hpp"
 #include "RNG.hpp"
 #include "Stats.hpp"
-#include <iostream>
-#include <string>
 
 Room::Room() {
   if (RNG::roll_chance(0.5)) {
@@ -23,39 +20,6 @@ Room::Room() {
   }
 }
 
-void Room::display() {
-  std::string command;
-  bool in_room = true;
-
-  while (in_room) {
-    Console::clear_screen();
-    std::cout << "You have entered a room." << std::endl;
-
-    std::cout << "Enemies in the room:" << std::endl;
-    for (const auto &enemy : enemies) {
-      std::cout << "- " << enemy.get_name() << " (HP: " << enemy.get_stats().hp
-                << ")" << std::endl;
-    }
-
-    std::cout << "Loot in the room:" << std::endl;
-    for (const auto &item : loot) {
-      std::cout << "- " << item.get_name() << std::endl;
-    }
-
-    std::cout << "Enter command (search/exit): ";
-    std::getline(std::cin, command);
-
-    if (command == "look") {
-      std::cout << "You look around the room." << std::endl;
-      if (enemies.empty() && loot.empty()) {
-        std::cout << "The room is empty." << std::endl;
-      }
-      Console::wait_for_keypress();
-    } else if (command == "exit") {
-      std::cout << "Exiting room." << std::endl;
-      in_room = false;
-    } else {
-      std::cout << "Invalid command." << std::endl;
-    }
-  }
-}
+// getters
+const std::vector<Enemy> &Room::get_enemies() const { return enemies; }
+const std::vector<Item> &Room::get_loot() const { return loot; }

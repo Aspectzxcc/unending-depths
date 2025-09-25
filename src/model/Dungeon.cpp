@@ -1,6 +1,4 @@
 #include "Dungeon.hpp"
-#include "Console.hpp"
-#include <iostream>
 
 Dungeon::Dungeon() {
   for (std::size_t i = 0; i < DEFAULT_NUM_LEVELS; ++i) {
@@ -8,37 +6,17 @@ Dungeon::Dungeon() {
   }
 }
 
-void Dungeon::display() {
-  std::string command;
-  bool in_dungeon = true;
-
-  while (in_dungeon) {
-    Console::clear_screen();
-    if (current_level_index == 0) {
-      std::cout << "You are at the entrance of the dungeon." << std::endl;
-    } else {
-      std::cout << "You are at level " << current_level_index << std::endl;
-    }
-    std::cout << "Enter command (descend/exit): " << std::endl;
-    std::getline(std::cin, command);
-
-    if (command == "descend") {
-      if (current_level_index >= levels.size()) {
-        std::cout << "You have reached the bottom of the dungeon!" << std::endl;
-        in_dungeon = false;
-        return;
-      }
-
-      std::cout << "You are descending to level " << current_level_index + 1
-                << std::endl;
-      levels[current_level_index]->display();
-
-      ++current_level_index;
-    } else if (command == "exit") {
-      std::cout << "Exiting dungeon." << std::endl;
-      in_dungeon = false;
-    } else {
-      std::cout << "Invalid command." << std::endl;
-    }
-  }
+// getters
+const std::size_t &Dungeon::get_current_level_index() const {
+  return current_level_index;
 }
+const std::vector<std::unique_ptr<Level>> &Dungeon::get_levels() const {
+  return levels;
+}
+
+// setters
+void Dungeon::add_level(std::unique_ptr<Level> level) {
+  levels.push_back(std::move(level));
+}
+
+void Dungeon::increment_current_level_index() { ++current_level_index; }

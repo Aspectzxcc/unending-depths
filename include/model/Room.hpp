@@ -6,7 +6,8 @@
 class Room {
 public:
   Room();
-  void display();
+  const std::vector<Enemy> &get_enemies() const;
+  const std::vector<Item> &get_loot() const;
 
 private:
   std::vector<Enemy> enemies;

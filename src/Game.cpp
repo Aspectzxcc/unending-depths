@@ -1,6 +1,7 @@
 #include "Game.hpp"
 #include "Console.hpp"
 #include "Dungeon.hpp"
+#include "DungeonView.hpp"
 #include <iostream>
 #include <string>
 
@@ -15,7 +16,8 @@ void Game::run() {
 
     if (command == "start") {
       Dungeon dungeon;
-      dungeon.display();
+      DungeonView dungeon_view(dungeon);
+      dungeon_view.display();
     } else if (command == "exit") {
       std::cout << "Exiting game." << std::endl;
       is_running = false;
