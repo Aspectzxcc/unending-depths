@@ -1,4 +1,4 @@
-#include "Enemy.hpp"
+#include "model/Enemy.hpp"
 
 Enemy::Enemy(const Stats &stats, const std::string &name)
     : stats(stats), name(name) {}

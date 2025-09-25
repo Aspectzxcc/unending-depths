@@ -1,5 +1,5 @@
-#include "RoomView.hpp"
-#include "Console.hpp"
+#include "view/RoomView.hpp"
+#include "utils/Console.hpp"
 #include <iostream>
 
 RoomView::RoomView(Room &room) : room(room) {

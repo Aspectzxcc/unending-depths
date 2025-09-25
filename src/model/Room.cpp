@@ -1,6 +1,6 @@
-#include "Room.hpp"
-#include "RNG.hpp"
-#include "Stats.hpp"
+#include "model/Room.hpp"
+#include "model/Stats.hpp"
+#include "utils/RNG.hpp"
 
 Room::Room() {
   if (RNG::roll_chance(0.5)) {

@@ -1,6 +1,6 @@
-#include "DungeonView.hpp"
-#include "Console.hpp"
-#include "LevelView.hpp"
+#include "view/DungeonView.hpp"
+#include "utils/Console.hpp"
+#include "view/LevelView.hpp"
 #include <iostream>
 
 DungeonView::DungeonView(Dungeon &dungeon) : dungeon(dungeon) {

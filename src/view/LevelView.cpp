@@ -1,6 +1,6 @@
-#include "LevelView.hpp"
-#include "Console.hpp"
-#include "RoomView.hpp"
+#include "view/LevelView.hpp"
+#include "utils/Console.hpp"
+#include "view/RoomView.hpp"
 #include <iostream>
 
 LevelView::LevelView(Level &level) : level(level) {

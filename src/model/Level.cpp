@@ -1,4 +1,4 @@
-#include "Level.hpp"
+#include "model/Level.hpp"
 
 Level::Level() {
   for (std::size_t i = 0; i < DEFAULT_NUM_ROOMS; ++i) {

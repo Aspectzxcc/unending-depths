@@ -1,4 +1,4 @@
-#include "RNG.hpp"
+#include "utils/RNG.hpp"
 
 std::mt19937 &RNG::get_engine() {
   static std::mt19937 rng(std::random_device{}());

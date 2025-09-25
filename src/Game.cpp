@@ -1,7 +1,7 @@
 #include "Game.hpp"
-#include "Console.hpp"
-#include "Dungeon.hpp"
-#include "DungeonView.hpp"
+#include "model/Dungeon.hpp"
+#include "utils/Console.hpp"
+#include "view/DungeonView.hpp"
 #include <iostream>
 #include <string>
 

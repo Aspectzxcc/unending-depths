@@ -1,4 +1,4 @@
-#include "Dungeon.hpp"
+#include "model/Dungeon.hpp"
 
 Dungeon::Dungeon() {
   for (std::size_t i = 0; i < DEFAULT_NUM_LEVELS; ++i) {

@@ -1,4 +1,4 @@
-#include "Item.hpp"
+#include "model/Item.hpp"
 
 Item::Item(const std::string &name) : name(name) {}
 

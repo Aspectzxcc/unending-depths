@@ -1,5 +1,5 @@
 #pragma once
-#include "Dungeon.hpp"
+#include "model/Dungeon.hpp"
 #include <functional>
 #include <string>
 #include <unordered_map>
