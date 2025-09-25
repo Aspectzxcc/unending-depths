@@ -23,6 +23,8 @@ void Level::display() {
         return;
       }
 
+      rooms.emplace_back(std::make_unique<Room>());
+
       std::string direction = commandl.substr(3);
       std::cout << "You are moving " << direction << " to room "
                 << current_room_index + 1 << std::endl;
