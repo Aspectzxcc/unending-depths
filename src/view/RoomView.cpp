@@ -33,7 +33,7 @@ void RoomView::display_attack(bool enemy_present, int enemy_hp) {
     return;
   }
 
-  std::cout << "Attacking the first enemy." << std::endl;
+  std::cout << "Attacking enemy." << std::endl;
 
   if (enemy_hp <= 0) {
     std::cout << "Enemy defeated!" << std::endl;
