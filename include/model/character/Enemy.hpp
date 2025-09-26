@@ -1,5 +1,5 @@
 #pragma once
-#include "Stats.hpp"
+#include "model/Stats.hpp"
 #include <string>
 
 class Enemy {

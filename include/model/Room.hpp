@@ -1,6 +1,6 @@
 #pragma once
-#include "Enemy.hpp"
-#include "Item.hpp"
+#include "character/Enemy.hpp"
+#include "item/Item.hpp"
 #include <vector>
 
 class Room {
