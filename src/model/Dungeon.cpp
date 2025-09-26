@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 
-void Dungeon::run() {
+void Dungeon::run(Player &player) {
   std::string command;
 
   while (true) {
@@ -14,7 +14,7 @@ void Dungeon::run() {
     std::getline(std::cin, command);
 
     if (command == "enter") {
-      enter();
+      enter(player);
     } else if (command == "exit") {
       std::cout << "Exiting the dungeon." << std::endl;
       return;
@@ -24,9 +24,9 @@ void Dungeon::run() {
   }
 }
 
-void Dungeon::enter() {
+void Dungeon::enter(Player &player) {
   std::unique_ptr<Level> new_level = std::make_unique<Level>();
   levels.push_back(std::move(new_level));
   current_level_index++;
-  levels[current_level_index - 1]->run();
+  levels[current_level_index - 1]->run(player);
 }

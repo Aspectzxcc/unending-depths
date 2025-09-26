@@ -29,7 +29,7 @@ Room::Room() {
   }
 }
 
-void Room::run() {
+void Room::run(Player &player) {
   std::string command;
 
   while (true) {
@@ -37,7 +37,7 @@ void Room::run() {
     std::cout << "You are in a room." << std::endl;
     if (looked)
       look();
-    std::cout << "Enter command (look/exit): ";
+    std::cout << "Enter command (look/attack/exit): ";
     std::getline(std::cin, command);
 
     if (command == "look") {
@@ -46,6 +46,22 @@ void Room::run() {
       } else {
         look();
         looked = true;
+      }
+      Console::wait_for_keypress();
+    } else if (command == "attack") {
+      if (enemies.empty()) {
+        std::cout << "No enemies to attack." << std::endl;
+      } else {
+        std::cout << "Attacking the first enemy: " << enemies[0].get_name()
+                  << std::endl;
+        player.attack(enemies[0]);
+        if (enemies[0].get_stats().hp <= 0) {
+          std::cout << "Enemy defeated!" << std::endl;
+          enemies.erase(enemies.begin());
+        } else {
+          std::cout << "Enemy HP is now: " << enemies[0].get_stats().hp
+                    << std::endl;
+        }
       }
       Console::wait_for_keypress();
     } else if (command == "exit") {

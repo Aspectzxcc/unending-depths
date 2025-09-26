@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 
-void Level::run() {
+void Level::run(Player &player) {
   std::string command;
 
   while (true) {
@@ -12,7 +12,7 @@ void Level::run() {
     std::getline(std::cin, command);
 
     if (command == "go") {
-      go();
+      go(player);
     } else if (command == "exit") {
       std::cout << "Exiting the level." << std::endl;
       return;
@@ -22,9 +22,9 @@ void Level::run() {
   }
 }
 
-void Level::go() {
+void Level::go(Player &player) {
   std::unique_ptr<Room> new_room = std::make_unique<Room>();
   rooms.push_back(std::move(new_room));
   current_room_index++;
-  rooms[current_room_index - 1]->run();
+  rooms[current_room_index - 1]->run(player);
 }

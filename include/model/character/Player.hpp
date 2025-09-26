@@ -1,17 +1,16 @@
 #pragma once
-#include "model/Stats.hpp"
+#include "Character.hpp"
 #include "model/item/Item.hpp"
 #include <memory>
-#include <string>
 #include <vector>
 
-class Player {
+class Player : public Character {
 public:
-  Player(int health, const Stats &stats);
+  Player(const Stats &stats, const std::string &name);
+  const std::vector<std::unique_ptr<Item>> &get_inventory() const;
+  void add_item(std::unique_ptr<Item> item);
+  void remove_item(size_t index);
 
 private:
-  int health;
-  std::string name;
-  Stats stats;
   std::vector<std::unique_ptr<Item>> inventory;
 };

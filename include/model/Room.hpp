@@ -1,12 +1,13 @@
 #pragma once
 #include "character/Enemy.hpp"
 #include "item/Item.hpp"
+#include "model/character/Player.hpp"
 #include <vector>
 
 class Room {
 public:
   Room();
-  void run();
+  void run(Player &player);
 
 private:
   std::vector<Enemy> enemies;
