@@ -7,7 +7,8 @@
 
 class Level {
 public:
-  void run(Player &player);
+  Room &get_current_room();
+  void add_room(std::unique_ptr<Room> room);
 
 private:
   std::vector<std::unique_ptr<Room>> rooms;

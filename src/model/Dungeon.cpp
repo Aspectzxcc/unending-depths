@@ -1,5 +1,7 @@
 #include "model/Dungeon.hpp"
+#include "controller/LevelController.hpp"
 #include "util/Console.hpp"
+#include "view/LevelView.hpp"
 #include <iostream>
 #include <string>
 
@@ -28,5 +30,7 @@ void Dungeon::enter(Player &player) {
   std::unique_ptr<Level> new_level = std::make_unique<Level>();
   levels.push_back(std::move(new_level));
   current_level_index++;
-  levels[current_level_index - 1]->run(player);
+  LevelController controller;
+  LevelView view;
+  controller.run(*levels[current_level_index - 1], view, player);
 }
