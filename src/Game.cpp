@@ -18,7 +18,11 @@ void Game::run() {
       DungeonController controller;
       DungeonView view;
       Dungeon dungeon;
-      Player player({100, 10, 5, 5}, "Hero");
+      Player player(std::unordered_map<StatType, int>{{StatType::HP, 100},
+                                                      {StatType::STR, 10},
+                                                      {StatType::DEX, 10},
+                                                      {StatType::CON, 10}},
+                    "Hero");
       controller.run(dungeon, view, player);
     } else if (command == "exit") {
       std::cout << "Exiting game." << std::endl;

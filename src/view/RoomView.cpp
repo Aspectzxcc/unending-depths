@@ -70,7 +70,7 @@ void RoomView::display_loot(Room &room) {
   } else {
     std::cout << "Loot in the room:" << std::endl;
     for (const auto &item : loot) {
-      std::cout << "- " << item.get_name() << std::endl;
+      std::cout << "- " << item->get_name() << std::endl;
     }
   }
 }
