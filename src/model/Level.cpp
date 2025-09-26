@@ -1,7 +1,8 @@
 #include "model/Level.hpp"
 
-Room &Level::get_current_room() { return *rooms[rooms.size() - 1]; }
+Room &Level::get_current_room() { return *current_room; }
 
-void Level::add_room(std::unique_ptr<Room> room) {
-  rooms.push_back(std::move(room));
+void Level::enter_new_room() {
+  current_room = std::make_unique<Room>();
+  room_number++;
 }

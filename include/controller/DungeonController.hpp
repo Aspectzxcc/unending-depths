@@ -1,5 +1,6 @@
 #pragma once
 #include "model/Dungeon.hpp"
+#include "model/character/Player.hpp"
 #include "view/DungeonView.hpp"
 
 class DungeonController {

@@ -11,7 +11,7 @@ void DungeonController::run(Dungeon &dungeon, DungeonView &dungeonView,
     std::getline(std::cin, command);
 
     if (command == "enter") {
-      dungeon.add_level(std::make_unique<Level>());
+      dungeon.enter_new_level();
       LevelController controller;
       LevelView view;
       controller.run(dungeon.get_current_level(), view, player);

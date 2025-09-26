@@ -1,7 +1,8 @@
 #include "model/Dungeon.hpp"
 
-Level &Dungeon::get_current_level() { return *levels[levels.size() - 1]; }
+Level &Dungeon::get_current_level() { return *current_level; }
 
-void Dungeon::add_level(std::unique_ptr<Level> level) {
-  levels.push_back(std::move(level));
+void Dungeon::enter_new_level() {
+  current_level = std::make_unique<Level>();
+  level_number++;
 }

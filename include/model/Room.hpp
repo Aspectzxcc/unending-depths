@@ -14,5 +14,4 @@ public:
 private:
   std::vector<Enemy> enemies;
   std::vector<Item> loot;
-  bool looked = false;
 };

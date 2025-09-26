@@ -10,7 +10,7 @@ void LevelController::run(Level &level, LevelView &levelView, Player &player) {
     std::getline(std::cin, command);
 
     if (command == "go") {
-      level.add_room(std::make_unique<Room>());
+      level.enter_new_room();
       RoomController controller;
       RoomView view;
       controller.run(level.get_current_room(), view, player);
