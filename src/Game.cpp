@@ -1,4 +1,5 @@
 #include "Game.hpp"
+#include "controller/DungeonController.hpp"
 #include "model/Dungeon.hpp"
 #include "model/character/Player.hpp"
 #include "util/Console.hpp"
@@ -14,9 +15,11 @@ void Game::run() {
     std::getline(std::cin, command);
 
     if (command == "start") {
+      DungeonController controller;
+      DungeonView view;
       Dungeon dungeon;
       Player player({100, 10, 5, 5}, "Hero");
-      dungeon.run(player);
+      controller.run(dungeon, view, player);
     } else if (command == "exit") {
       std::cout << "Exiting game." << std::endl;
       return;

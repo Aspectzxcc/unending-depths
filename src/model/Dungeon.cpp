@@ -1,36 +1,7 @@
 #include "model/Dungeon.hpp"
-#include "controller/LevelController.hpp"
-#include "util/Console.hpp"
-#include "view/LevelView.hpp"
-#include <iostream>
-#include <string>
 
-void Dungeon::run(Player &player) {
-  std::string command;
+Level &Dungeon::get_current_level() { return *levels[levels.size() - 1]; }
 
-  while (true) {
-    Console::clear_screen();
-    std::cout << "You are at dungeon level " << current_level_index + 1
-              << std::endl;
-    std::cout << "Enter Comand (enter/exit): ";
-    std::getline(std::cin, command);
-
-    if (command == "enter") {
-      enter(player);
-    } else if (command == "exit") {
-      std::cout << "Exiting the dungeon." << std::endl;
-      return;
-    } else {
-      std::cout << "Invalid command." << std::endl;
-    }
-  }
-}
-
-void Dungeon::enter(Player &player) {
-  std::unique_ptr<Level> new_level = std::make_unique<Level>();
-  levels.push_back(std::move(new_level));
-  current_level_index++;
-  LevelController controller;
-  LevelView view;
-  controller.run(*levels[current_level_index - 1], view, player);
+void Dungeon::add_level(std::unique_ptr<Level> level) {
+  levels.push_back(std::move(level));
 }
