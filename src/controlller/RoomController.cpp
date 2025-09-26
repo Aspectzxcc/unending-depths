@@ -16,7 +16,7 @@ void RoomController::run(Room &room, RoomView &roomView, Player &player) {
 
       if (enemy_present) {
         player.attack(room.get_enemy(0));
-        enemy_hp = room.get_enemy(0).get_stats().hp;
+        enemy_hp = room.get_enemy(0).get_stats().at(StatType::HP);
 
         if (enemy_hp <= 0) {
           room.remove_enemy(0);

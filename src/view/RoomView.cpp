@@ -1,4 +1,5 @@
 #include "view/RoomView.hpp"
+#include "model/character/StatType.hpp"
 #include "util/Console.hpp"
 #include <iostream>
 
@@ -55,8 +56,9 @@ void RoomView::display_enemies(Room &room) {
   } else {
     std::cout << "Enemies in the room:" << std::endl;
     for (const auto &enemy : enemies) {
-      std::cout << "- " << enemy.get_name() << " (HP: " << enemy.get_stats().hp
-                << ")" << std::endl;
+      std::cout << "- " << enemy.get_name()
+                << " (HP: " << enemy.get_stats().at(StatType::HP) << ")"
+                << std::endl;
     }
   }
 }

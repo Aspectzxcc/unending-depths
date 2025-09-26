@@ -1,15 +1,17 @@
 #pragma once
-#include "model/Stats.hpp"
+#include "model/character/StatType.hpp"
 #include <string>
+#include <unordered_map>
 
 class Character {
 public:
-  Character(const Stats &stats, const std::string &name);
+  Character(const std::unordered_map<StatType, int> &stats,
+            const std::string &name);
   void attack(Character &target);
-  const Stats &get_stats() const;
+  const std::unordered_map<StatType, int> &get_stats() const;
   const std::string &get_name() const;
 
 private:
-  Stats stats;
+  std::unordered_map<StatType, int> stats;
   std::string name;
 };

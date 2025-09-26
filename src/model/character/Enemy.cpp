@@ -1,4 +1,5 @@
 #include "model/character/Enemy.hpp"
 
-Enemy::Enemy(const Stats &stats, const std::string &name)
+Enemy::Enemy(const std::unordered_map<StatType, int> &stats,
+             const std::string &name)
     : Character(stats, name) {}

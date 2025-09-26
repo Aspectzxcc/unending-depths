@@ -1,7 +1,8 @@
 #include "model/character/Player.hpp"
 
-Player::Player(const Stats &stats, const std::string &name)
-    : Character(stats, name) {}
+Player::Player(const std::unordered_map<StatType, int> &stats,
+               const std::string &name)
+    : Character(stats, name), equipped_weapon(nullptr) {}
 
 const std::vector<std::unique_ptr<Item>> &Player::get_inventory() const {
   return inventory;

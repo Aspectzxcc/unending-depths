@@ -3,5 +3,6 @@
 
 class Enemy : public Character {
 public:
-  Enemy(const Stats &stats, const std::string &name);
+  Enemy(const std::unordered_map<StatType, int> &stats,
+        const std::string &name);
 };
