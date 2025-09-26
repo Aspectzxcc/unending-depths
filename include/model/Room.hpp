@@ -5,7 +5,7 @@
 
 class Room {
 public:
-  Room();
+  void generate();
   const std::vector<Enemy> &get_enemies() const;
   const std::vector<Item> &get_loot() const;
   Enemy &get_enemy(int index);

@@ -3,7 +3,7 @@
 #include "util/RNG.hpp"
 #include <cstddef>
 
-Room::Room() {
+void Room::generate() {
   if (RNG::roll_chance(0.5)) {
     std::size_t MIN_NUM_ENEMIES = 1;
     std::size_t MAX_NUM_ENEMIES = 3;
