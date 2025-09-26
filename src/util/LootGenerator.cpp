@@ -1,6 +1,8 @@
 #include "util/LootGenerator.hpp"
 #include "model/character/StatType.hpp"
+#include "model/item/modifier/StatModifier.hpp"
 #include "util/RNG.hpp"
+#include <unordered_map>
 #include <vector>
 
 const std::unordered_map<std::string, int> weapon_prefix_bonus = {
@@ -16,10 +18,10 @@ const std::unordered_map<std::string, int> weapon_material_bonus = {
 const std::vector<std::string> weapon_types = {"Sword", "Axe", "Bow", "Dagger",
                                                "Mace"};
 
-const std::unordered_map<std::string, std::pair<StatType, int>> suffix_bonus = {
-    {"of Strength", {StatType::STR, 2}},
-    {"of Agility", {StatType::DEX, 2}},
-    {"of Health", {StatType::CON, 2}}};
+std::unordered_map<std::string, StatModifier> suffix_bonus = {
+    {"of Strength", StatModifier(StatType::STR, 2)},
+    {"of Agility", StatModifier(StatType::DEX, 2)},
+    {"of Vitality", StatModifier(StatType::CON, 2)}};
 
 std::unique_ptr<Item> LootGenerator::generate_item(int dungeon_level) {
   return generate_weapon(dungeon_level);
@@ -36,12 +38,12 @@ std::unique_ptr<Weapon> LootGenerator::generate_weapon(int dungeon_level) {
   int material_bonus = weapon_material_bonus.at(material);
   int total_damage = base_damage + prefix_bonus + material_bonus;
 
-  std::unordered_map<StatType, int> stat_bonuses;
+  std::vector<StatModifier> stat_bonuses;
+
   if (RNG::roll_chance(0.3)) {
     std::string suffix = random_suffix();
     name += " " + suffix;
-    auto [stat, bonus] = suffix_bonus.at(suffix);
-    stat_bonuses[stat] = bonus;
+    stat_bonuses.push_back(suffix_bonus.at(suffix));
   }
 
   return std::make_unique<Weapon>(name, stat_bonuses, total_damage);
