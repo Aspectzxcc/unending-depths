@@ -1,29 +1,32 @@
 #include "model/Dungeon.hpp"
+#include "util/Console.hpp"
+#include <iostream>
+#include <string>
 
-Dungeon::Dungeon() {
-  std::size_t MIN_NUM_LEVELS = 1;
+void Dungeon::run() {
+  std::string command;
 
-  for (std::size_t i = 0; i < MIN_NUM_LEVELS; ++i) {
-    levels.push_back(std::make_unique<Level>());
+  while (true) {
+    Console::clear_screen();
+    std::cout << "You are at dungeon level " << current_level_index + 1
+              << std::endl;
+    std::cout << "Enter Comand (enter/exit): ";
+    std::getline(std::cin, command);
+
+    if (command == "enter") {
+      enter();
+    } else if (command == "exit") {
+      std::cout << "Exiting the dungeon." << std::endl;
+      return;
+    } else {
+      std::cout << "Invalid command." << std::endl;
+    }
   }
 }
 
-bool Dungeon::descend() {
-  if (current_level_index >= levels.size()) {
-    return false;
-  }
-  ++current_level_index;
-  return true;
-}
-
-// getters
-const std::size_t &Dungeon::get_current_level_index() const {
-  return current_level_index;
-}
-const std::vector<std::unique_ptr<Level>> &Dungeon::get_levels() const {
-  return levels;
-}
-
-const Level &Dungeon::get_current_level() const {
-  return *(levels[current_level_index - 1]);
+void Dungeon::enter() {
+  std::unique_ptr<Level> new_level = std::make_unique<Level>();
+  levels.push_back(std::move(new_level));
+  current_level_index++;
+  levels[current_level_index - 1]->run();
 }

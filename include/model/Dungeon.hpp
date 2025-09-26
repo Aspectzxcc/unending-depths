@@ -6,13 +6,10 @@
 
 class Dungeon {
 public:
-  Dungeon();
-  bool descend();
-  const std::size_t &get_current_level_index() const;
-  const std::vector<std::unique_ptr<Level>> &get_levels() const;
-  const Level &get_current_level() const;
+  void run();
 
 private:
   std::vector<std::unique_ptr<Level>> levels;
   std::size_t current_level_index = 0;
+  void enter();
 };

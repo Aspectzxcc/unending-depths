@@ -1,39 +1,30 @@
 #include "model/Level.hpp"
-#include "util/RNG.hpp"
+#include "util/Console.hpp"
+#include <iostream>
+#include <string>
 
-Level::Level() {
-  std::size_t MIN_NUM_ROOMS = 1;
-  std::size_t MAX_NUM_ROOMS = 10;
-  std::size_t generated_rooms_count = RNG::range(MIN_NUM_ROOMS, MAX_NUM_ROOMS);
+void Level::run() {
+  std::string command;
 
-  for (std::size_t i = 1; i <= generated_rooms_count; ++i) {
-    rooms.push_back(std::make_unique<Room>());
+  while (true) {
+    Console::clear_screen();
+    std::cout << "Enter Command (go/exit): ";
+    std::getline(std::cin, command);
+
+    if (command == "go") {
+      go();
+    } else if (command == "exit") {
+      std::cout << "Exiting the level." << std::endl;
+      return;
+    } else {
+      std::cout << "Invalid command." << std::endl;
+    }
   }
 }
 
-bool Level::spawn_room() {
-  if (current_room_index >= rooms.size()) {
-    return false;
-  }
-  rooms.push_back(std::make_unique<Room>());
-  ++current_room_index;
-  return true;
-}
-
-// getters
-const std::size_t &Level::get_current_room_index() const {
-  return current_room_index;
-}
-
-const std::vector<std::unique_ptr<Room>> &Level::get_rooms() const {
-  return rooms;
-}
-
-const Room &Level::get_current_room() const {
-  return *(rooms[current_room_index]);
-}
-
-// setters
-void Level::add_room(std::unique_ptr<Room> room) {
-  rooms.push_back(std::move(room));
+void Level::go() {
+  std::unique_ptr<Room> new_room = std::make_unique<Room>();
+  rooms.push_back(std::move(new_room));
+  current_room_index++;
+  rooms[current_room_index - 1]->run();
 }
