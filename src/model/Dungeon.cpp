@@ -24,6 +24,6 @@ const std::vector<std::unique_ptr<Level>> &Dungeon::get_levels() const {
   return levels;
 }
 
-Level &Dungeon::get_current_level() {
+const Level &Dungeon::get_current_level() const {
   return *(levels[current_level_index - 1]);
 }

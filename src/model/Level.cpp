@@ -29,7 +29,9 @@ const std::vector<std::unique_ptr<Room>> &Level::get_rooms() const {
   return rooms;
 }
 
-Room &Level::get_current_room() { return *(rooms[current_room_index]); }
+const Room &Level::get_current_room() const {
+  return *(rooms[current_room_index]);
+}
 
 // setters
 void Level::add_room(std::unique_ptr<Room> room) {

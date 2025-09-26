@@ -10,7 +10,7 @@ public:
   bool descend();
   const std::size_t &get_current_level_index() const;
   const std::vector<std::unique_ptr<Level>> &get_levels() const;
-  Level &get_current_level();
+  const Level &get_current_level() const;
 
 private:
   std::vector<std::unique_ptr<Level>> levels;
