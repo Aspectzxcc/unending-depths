@@ -24,6 +24,12 @@ void RoomController::run(Room &room, RoomView &roomView, Player &player) {
       }
 
       roomView.display_attack(enemy_present, enemy_hp);
+    } else if (command == "take") {
+      bool item_present = !room.get_loot().empty();
+
+      if (item_present) {
+        player.add_item(room.take_loot(0));
+      }
     } else if (command == "exit") {
       return;
     } else {

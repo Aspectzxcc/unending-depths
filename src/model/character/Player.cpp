@@ -24,6 +24,11 @@ void Player::attack(Character &target) {
     target.modify_stat(StatType::HP, target_health);
   }
 }
+
+void Player::equip_weapon(std::unique_ptr<Weapon> weapon) {
+  equipped_weapon = std::move(weapon);
+}
+
 const std::vector<std::unique_ptr<Item>> &Player::get_inventory() const {
   return inventory;
 }

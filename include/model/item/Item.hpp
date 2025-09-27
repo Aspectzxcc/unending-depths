@@ -7,6 +7,7 @@ class Item {
 public:
   Item(const std::string &name,
        const std::vector<StatModifier> &stat_modifiers = {});
+  virtual ~Item() = default;
   const std::string &get_name() const;
   const std::vector<StatModifier> &get_stat_modifiers() const;
 

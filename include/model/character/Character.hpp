@@ -7,6 +7,7 @@ class Character {
 public:
   Character(const std::unordered_map<StatType, int> &stats,
             const std::string &name);
+  virtual ~Character() = default;
   virtual void attack(Character &target) = 0;
   const std::unordered_map<StatType, int> &get_stats() const;
   const std::string &get_name() const;

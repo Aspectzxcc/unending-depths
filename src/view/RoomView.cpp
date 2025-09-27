@@ -12,7 +12,7 @@ void RoomView::display(Room &room) {
     display_loot(room);
   }
 
-  std::cout << "Available commands: look, attack, exit" << std::endl;
+  std::cout << "Available commands: look, attack, take, exit" << std::endl;
 }
 
 void RoomView::display_look(Room &room) {
@@ -56,8 +56,8 @@ void RoomView::display_enemies(Room &room) {
   } else {
     std::cout << "Enemies in the room:" << std::endl;
     for (const auto &enemy : enemies) {
-      std::cout << "- " << enemy.get_name()
-                << " (HP: " << enemy.get_stats().at(StatType::HP) << ")"
+      std::cout << "- " << enemy->get_name()
+                << " (HP: " << enemy->get_stats().at(StatType::HP) << ")"
                 << std::endl;
     }
   }

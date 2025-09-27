@@ -3,7 +3,7 @@
 #include "util/RNG.hpp"
 
 std::unique_ptr<Room> RoomGenerator::generate_room(int dungeon_level) {
-  std::vector<Enemy> enemies;
+  std::vector<std::unique_ptr<Enemy>> enemies;
   std::vector<std::unique_ptr<Item>> loot;
 
   if (RNG::roll_chance(0.5)) {
@@ -12,13 +12,13 @@ std::unique_ptr<Room> RoomGenerator::generate_room(int dungeon_level) {
     std::size_t spawned_enemies_count =
         RNG::range(MIN_NUM_ENEMIES, MAX_NUM_ENEMIES);
 
-    for (std::size_t i = 1; i <= spawned_enemies_count; ++i) {
-      enemies.emplace_back(
+    for (std::size_t i = 0; i < spawned_enemies_count; ++i) {
+      enemies.push_back(std::make_unique<Enemy>(
           std::unordered_map<StatType, int>{{StatType::HP, 10},
                                             {StatType::STR, 3},
                                             {StatType::DEX, 2},
                                             {StatType::CON, 1}},
-          "Goblin");
+          "Goblin"));
     }
   }
 
